@@ -12,6 +12,16 @@ User -> Routing | Richiesta (GET,POST,PUT,DELETE) -> CONTROLLER | Logica [ -> se
 
 -------------------------
 
+Abbiamo usato un comando per creare un model con insieme anche una migrazione
+
+	php artisan make:model --migration
+
+oppure
+
+	php artisan make:model -m
+
+-------------------------
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
