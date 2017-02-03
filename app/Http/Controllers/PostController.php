@@ -46,7 +46,7 @@ class PostController extends Controller
         ));
 
         // store data into the database
-        $post = new Post();
+        $post = new Post;
 
         $post->title = $request->title;
         $post->body = $request->body;
@@ -73,7 +73,9 @@ class PostController extends Controller
     public function show($id)
     {
         //
-        return view('posts.show');
+        $post = Post::find($id);
+        // return view('posts.show')->whit('post', $post);
+        return view('posts.show')->withPost($post);
     }
 
     /**
