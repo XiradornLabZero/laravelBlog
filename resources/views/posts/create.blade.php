@@ -11,7 +11,7 @@
             {{-- Collective\Html\HtmlServiceProvider::class-> |||| Classic way without aliases --}}
             {!! Form::open(['route' => 'posts.store']) !!}
                 {{ Form::label('title', 'Title:') }}
-                {{ Form::text('text', null, ['class' => 'form-control']) }}
+                {{ Form::text('title', null, ['class' => 'form-control']) }}
 
                 {{ Form::label('body', "Post Body") }}
                 {{ Form::textarea('body', null, ['class' => 'form-control']) }}
