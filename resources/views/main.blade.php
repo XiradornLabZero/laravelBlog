@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		
+
 		@include('partials._head')
-	
+
 	</head>
 
 	<body>
@@ -13,6 +13,8 @@
 		@include('partials._nav')
 
 		<div class="container">
+
+			@include('partials._messages')
 
 			{{-- content inside change and we have to inject this with yield --}}
 			@yield('content')
