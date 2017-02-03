@@ -25,3 +25,7 @@ Route::get('about', 'PageController@getAbout');
 // 	return view('contact');
 // });
 Route::get('contact', 'PageController@getContact');
+
+// we want to manage a resource for menage the posts controller
+// so we can use ALL the routes provided into post controller
+Route::resource('posts', 'PostController');

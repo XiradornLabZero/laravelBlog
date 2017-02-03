@@ -4,7 +4,7 @@
 
 **View**: Si occupa dell'interazione con il lato client a di far capire al controller quale sia la richiesta dell'utente attraverso richieste fatte al controller attraverso il sistema di routing delle richieste di queste tipologie: GET, POST, PUT, DELETE. Il view a sua volta NON parla mai con il Model ma invia le richiese al Controller attraverso le procedure di routing e ripropone le risposte del controller a video nella corretta view
 
-**Controller**: Cuore dell'applicazione esegue tutta la parte funzionale e logica della stessa applicazione, eleaborando le informazioni e restituirle alla view corretta. In sostanza il controller va a prendere le richieste della view, ne elabora la logica, chiede al model di fornire i dati presi dal database ad esempio e rielaborandoli, gli reinvia alla view corretta. 
+**Controller**: Cuore dell'applicazione esegue tutta la parte funzionale e logica della stessa applicazione, eleaborando le informazioni e restituirle alla view corretta. In sostanza il controller va a prendere le richieste della view, ne elabora la logica, chiede al model di fornire i dati presi dal database ad esempio e rielaborandoli, gli reinvia alla view corretta.
 
 ### In sostanza:  
 
@@ -19,6 +19,20 @@ Abbiamo usato un comando per creare un model con insieme anche una migrazione
 oppure
 
 	php artisan make:model -m
+
+-------------------------
+
+Abbiamo usato una variante per la creazione del nostro controller aggiungendo la postilla resource.
+
+	php artisan make:controller PostController --resource
+
+Possiamo includere le risorse e le routes create nel controller attraverso questo comando nel web.php della cartella routes e il comando è il seguente
+
+	Route::resource('post', 'PostController');
+
+Per controllare che queste siano avviabili è possibile vederle attraverso questo comando da cli
+
+	php artisan route:list
 
 -------------------------
 
