@@ -15,7 +15,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        // It's a backhand index NOT an site index
+
+        //  So create a variable and store all the blog post in it from database
+        $posts = Post::all();
+
+        // return a view and pass in the above variable
+        return view('posts.index')->withPosts($posts);
     }
 
     /**
