@@ -92,7 +92,19 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        // we must able to show the form with a get request
+        // filled with the current data from posts database
+
+        // after change the post, we doa post request and use
+        //  the store function for put new data into database
+
+        # first i can use the id from the get request for grab the
+        # post from database
+        $post = Post::find($id);
+
+        # return the wiew with informations
+        return view('posts.edit')->withPost($post);
+
     }
 
     /**
