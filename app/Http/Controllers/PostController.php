@@ -97,6 +97,7 @@ class PostController extends Controller
 
         // after change the post, we doa post request and use
         //  the store function for put new data into database
+        // whit UPDATE
 
         # first i can use the id from the get request for grab the
         # post from database
@@ -116,7 +117,27 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validate data
+        $this->validate($request, array(
+            'title' => 'required|max:255',
+            'body'  => 'required'
+        ));
+
+        // Save data to de database
+        // we not create a new Post object
+        $post = Post::find($id);
+
+        $post->title = $request->input('title'); // input get parameters from GET or POST send
+        $post->body = $request->input('body');
+        // laravel change autmatically the changed last timestamp
+
+        $post->save();
+
+        // set flash data with success message
+        Session::flash('success', 'This post was successfully changed !!!');
+
+        // redirect to the same page updated post.show
+        return redirect()->route('posts.show', $post->id);
     }
 
     /**

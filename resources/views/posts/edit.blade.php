@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-8">
             {{-- whit not OPEN but MODEL we said to laravel that the for connect to the model for bind data --}}
-            {!! Form::model($post, ['route' => ['posts.update', $post->id]]) !!}
+            {!! Form::model($post, ['route' => ['posts.update', $post->id], "method" => "PUT"]) !!}
 
             {{ Form::label('title', 'Title:') }}
             {{-- <h1>{{ $post->title }}</h1> --}}
@@ -38,7 +38,8 @@
                     </div>
                     <div class="col-sm-6">
                         {{-- <a href="#" class="btn btn-success btn-block">'Save Changes</a> --}}
-                        {!! Html::linkRoute('posts.update', 'Save Changes', [$post->id], ['class' => 'btn btn-success btn-block']) !!}
+                        {{-- {!! Html::linkRoute('posts.update', 'Save Changes', [$post->id], ['class' => 'btn btn-success btn-block']) !!} --}}
+                        {{ Form::submit('Save Changes', ["class" => "btn btn-success btn-block"]) }}
                     </div>
                 </div>
             </div>
