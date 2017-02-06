@@ -18,7 +18,9 @@ class PostController extends Controller
         // It's a backhand index NOT an site index
 
         //  So create a variable and store all the blog post in it from database
-        $posts = Post::all();
+        //$posts = Post::all(); #for all post
+        $posts = Post::orderBy('id', 'desc')->paginate(10); #for paginate post
+        #we also order element from the last id to the first
 
         // return a view and pass in the above variable
         return view('posts.index')->withPosts($posts);
