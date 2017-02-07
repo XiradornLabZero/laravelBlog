@@ -12,6 +12,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
+
 class PageController extends Controller {
 
 	/**
@@ -19,7 +21,10 @@ class PageController extends Controller {
 	 * @return view
 	 */
 	public function getHome() {
-		return view('pages.welcome');
+		// $posts = Post::select('*') #we can omit the select *
+		$posts = Post::orderBy('created_at')->limit(4)->get();
+
+		return view('pages.welcome')->withPosts($posts);
 	}
 
 	/**

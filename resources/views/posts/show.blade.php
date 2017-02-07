@@ -37,6 +37,12 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {{-- <a href="{{ route('posts.index') }}" class="btn btn-default btn-block"> &laquo; See all Posts</a> --}}
+                        {!! Html::linkRoute("posts.index", "<< See All Posts", [], ["class" => "btn btn-default btn-block btn-h1-spacing"]) !!}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
