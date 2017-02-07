@@ -7,6 +7,13 @@ use App\Post;
 
 class BlogController extends Controller
 {
+
+    public function getIndex() {
+        $posts = Post::paginate(5);
+
+        return view('blog.index')->withPosts($posts);
+    }
+
     // slug correspond to route param and if i have multiple params
     // i must use into the function in the right order apper into the routes
     // es blog/{slug}/{id} >>>> getSingle($slug, $id)

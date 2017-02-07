@@ -31,8 +31,11 @@
 // Route::resource('posts', 'PostController');
 
 # just foro regroup
-Route::get('/blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[a-zA-Z0-9\_\-]+');
-Route::get('/', 'PageController@getHome');
+Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[a-zA-Z0-9\_\-]+');
+Route::get('blog', ['uses' => 'BlogController@getIndex', 'as' => 'blog.index']);
+
 Route::get('about', 'PageController@getAbout');
 Route::get('contact', 'PageController@getContact');
+Route::get('/', 'PageController@getHome');
+
 Route::resource('posts', 'PostController');
