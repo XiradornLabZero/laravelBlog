@@ -34,6 +34,24 @@ Per controllare che queste siano avviabili è possibile vederle attraverso quest
 
 	php artisan route:list
 
+
+-------------------------
+
+##Auth
+
+Per quanto riguarda la parte di autenticazione e avendo usato il sistema built in va fatta questa considerazione per andare per poter utilizzare le funzioni interne. Per vedere le varie route si può usare il sistema che permette di visualizzarle tramite il comando `php artisan route:list` ovvero il seguente codice aggiunto nel file *web.php*
+
+    Auth::routes();
+
+Alternativamente si può usare questa sintassi:
+
+	Route::get('auth/login', 'Auth\LoginController@showLoginForm');
+	Route::post('auth/login', 'Auth\LoginController@login');
+	Route::get('auth/logout', 'Auth\LoginController@logout');
+
+	Route::get('auth/register', 'Auth\RegisterController@showRegistrationForm');
+	Route::post('auth/register', 'Auth\RegisterController@register');
+
 -------------------------
 
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
