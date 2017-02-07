@@ -16,7 +16,9 @@
             <div class="well text-center">
                 <dl>
                     <dt>Url Slug:</dt>
-                    <dd><a href="{{ url($post->slug) }}">{{ url($post->slug) }}</a></dd>
+                    {{-- <dd><a href="{{ url("blog/$post->slug") }}">{{ url($post->slug) }}</a></dd> --}}
+                    {{-- equivalent --}}
+                    <dd><a href="{{ route('blog.single', $post->slug) }}">{{ route('blog.single', $post->slug) }}</a></dd>
                 </dl>
                 <dl>
                     <dt>Created At:</dt>
