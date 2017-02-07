@@ -54,6 +54,10 @@ Alternativamente si può usare questa sintassi:
 
 -------------------------
 
+Per fare il redirect alla mia route quando non sono loggato devo modificare il mio file in `app/Exception/Handler.php`
+
+-------------------------
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">

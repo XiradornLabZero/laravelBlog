@@ -16,6 +16,9 @@
 
 			@include('partials._messages')
 
+			{{-- we create an if statment for login check --}}
+			<div class="alert alert-{{ Auth::check() ? 'success' : 'danger' }}">{{ Auth::check() ? 'logged in' : 'logged out' }}</div>
+
 			{{-- content inside change and we have to inject this with yield --}}
 			@yield('content')
 
