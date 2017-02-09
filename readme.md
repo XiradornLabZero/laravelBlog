@@ -58,6 +58,26 @@ Per fare il redirect alla mia route quando non sono loggato devo modificare il m
 
 -------------------------
 
+#Importantissimo per le Auth e il Recupero password
+
+Come si evince nel codice della pagina `web.php` è possibile carpire un elemento importantissimo. Le Routes seguono l'ordine in cui vengono scritte. Quindi quando le uso è fondamentale usarle nell'ordine corretto al fine di poterne usare le procedure.
+
+Per il recupero, infatti ho più route per la stessa cosa e quindi è bene che ne venga descritto attraverso l'ordine la corretta esecuzione. Come si evince dal codice:
+
+	Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+	Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+	Route::get('password/reset/{token?}', 'Auth\ResetPasswordController@showResetForm'); # the ? indicate a optional variable
+	Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+si può facimenete capire che:
+
++ la prima route va a eseguire la vie della richiesta tramite mail
++ la seconda manda la richiesta tramite post nel sistema di mail alla mail desiderata
++ la terza ritorna al reset e dispone la seconda form per il reset che è quella del cambio pass effettivo
++ la quarta invia il tutto al database
+
+-------------------------
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
