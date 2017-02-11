@@ -38,6 +38,7 @@ Per controllare che queste siano avviabili è possibile vederle attraverso quest
 -------------------------
 
 ##Auth
+*E' possibile accorciare questo processo attraverso il comando `php artisan make:auth` ma è bene comprenderne il meccanimo*
 
 Per quanto riguarda la parte di autenticazione e avendo usato il sistema built in va fatta questa considerazione per andare per poter utilizzare le funzioni interne. Per vedere le varie route si può usare il sistema che permette di visualizzarle tramite il comando `php artisan route:list` ovvero il seguente codice aggiunto nel file *web.php*
 
@@ -66,7 +67,7 @@ Per il recupero, infatti ho più route per la stessa cosa e quindi è bene che n
 
 	Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
 	Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-	Route::get('password/reset/{token?}', 'Auth\ResetPasswordController@showResetForm'); # the ? indicate a optional variable
+	Route::get('password/reset/{token?}', ['uses' => 'Auth\ResetPasswordController@showResetForm', 'as' => 'passwprd.reset']); # the ? indicate a optional variable
 	Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 si può facimenete capire che:
@@ -74,7 +75,7 @@ si può facimenete capire che:
 + la prima route va a eseguire la vie della richiesta tramite mail
 + la seconda manda la richiesta tramite post nel sistema di mail alla mail desiderata
 + la terza ritorna al reset e dispone la seconda form per il reset che è quella del cambio pass effettivo
-+ la quarta invia il tutto al database
++ la quarta invia il tutto al database infatti è stata anche inserit la direttiva per il reset ovvero la route **password.reset** proprio per confermare la richiesta finale di inserimento nel database (questa è prevista dal sistema auth di base)
 
 -------------------------
 
