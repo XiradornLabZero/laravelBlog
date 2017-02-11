@@ -35,7 +35,7 @@
                     {{ Form::label('name', 'Name:') }}
                     {{ Form::text('name', null, ["class" => "form-control"]) }}
 
-                    {{ Form::submit("Submit Category", ["class" => "btn btn-success btn-block form-spacing-top"]) }}
+                    {{ Form::submit("Submit Category", ["class" => "btn btn-primary btn-block form-spacing-top"]) }}
                 {!! Form::close() !!}
 
             </div>

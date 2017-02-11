@@ -20,6 +20,17 @@
                 {{ Form::label('slug', 'Slug:') }}
                 {{ Form::text('slug', null, ['class' => 'form-control', 'required' => '', 'minlength' => '5', 'maxlength' => '191']) }}
 
+                {{ Form::label('category_id', 'Category:') }}
+                <select class="form-control" name="category_id">
+
+                    @foreach ($categories as $category)
+
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+
+                    @endforeach
+
+                </select>
+
                 {{ Form::label('body', "Post Body") }}
                 {{ Form::textarea('body', null, ['class' => 'form-control', 'required' => '']) }}
 

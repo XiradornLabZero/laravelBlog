@@ -22,7 +22,7 @@ class PageController extends Controller {
 	 */
 	public function getHome() {
 		// $posts = Post::select('*') #we can omit the select *
-		$posts = Post::orderBy('created_at')->limit(4)->get();
+		$posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
 
 		return view('pages.welcome')->withPosts($posts);
 	}

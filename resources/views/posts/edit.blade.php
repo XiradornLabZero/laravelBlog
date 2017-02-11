@@ -13,6 +13,11 @@
             {{-- <h1>{{ $post->title }}</h1> --}}
             {{ Form::text('title', null, ["class" => 'form-control input-lg']) }}
 
+            {{ Form::label('category_id', 'Category:', ["class" => "form-spacing-top"]) }}
+            {{-- {{ Form::select('category_id', ['key' => 'value', 'key2' => 'value2']) }} but is NOT recomended - generate this into controller --}}
+            {{-- {{ Form::select('category_id', $categories, $post->category_id, ["class" => "form-control"]) }} - $post->category_id is the current and w/ model form binding is not required --}}
+            {{ Form::select('category_id', $categories, null, ["class" => "form-control"]) }}
+
             {{ Form::label('slug', "Slug:", ["class" => "form-spacing-top"]) }}
             {{ Form::text('slug', null, ["class" => 'form-control']) }}
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
 use App\Post;
 use Session;
 
@@ -40,7 +41,9 @@ class PostController extends Controller
     {
         // used for display the form
         // nothing else
-        return view('posts.create');
+        // UPDATE - now we have to bring data from cat
+        $categories = Category::all();
+        return view('posts.create')->withCategories($categories);
     }
 
     /**
@@ -54,9 +57,10 @@ class PostController extends Controller
         // this function have this tasks
         // validate data w/ $this->validate($request, array())
         $this->validate($request, array(
-            'title' => 'required|max:191',
-            'slug'  => 'required|alpha_dash|min:5|max:191|unique:posts,slug',
-            'body'  => 'required'
+            'title'         => 'required|max:191',
+            'slug'          => 'required|alpha_dash|min:5|max:191|unique:posts,slug',
+            'category_id'   => 'required|integer',
+            'body'          => 'required'
         ));
 
         // store data into the database
@@ -64,6 +68,7 @@ class PostController extends Controller
 
         $post->title = $request->title;
         $post->slug = $request->slug;
+        $post->category_id = $request->category_id;
         $post->body = $request->body;
 
         $post->save();
@@ -87,7 +92,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        // so now we need to make an additional grabbing because there are cats now
         $post = Post::find($id);
         // return view('posts.show')->whit('post', $post);
         return view('posts.show')->withPost($post);
@@ -112,8 +117,19 @@ class PostController extends Controller
         # post from database
         $post = Post::find($id);
 
+        // inject categories
+        $categories = Category::all();
+
+        // i must do the select loop into this controller because is a better solution than make into views
+        $cats = []; #instanciate ary for setup all the elements and setup for view
+        foreach ($categories as $category) {
+            # code...
+            $cats[$category->id] = $category->name;
+        }
+
         # return the wiew with informations
-        return view('posts.edit')->withPost($post);
+        // return view('posts.edit')->withPost($post)->withCategories($categories);
+        return view('posts.edit')->withPost($post)->withCategories($cats);
 
     }
 
@@ -131,15 +147,17 @@ class PostController extends Controller
 
         if($request->input('slug') == $post->slug) {
             $this->validate($request, array(
-                'title' => 'required|max:191',
-                'body'  => 'required'
+                'title'         => 'required|max:191',
+                'category_id'   => 'required|integer',
+                'body'          => 'required'
             ));
         } else {
             // Validate data
             $this->validate($request, array(
-                'title' => 'required|max:191',
-                'slug'  => 'required|alpha_dash|min:5|max:191|unique:posts,slug',
-                'body'  => 'required'
+                'title'         => 'required|max:191',
+                'slug'          => 'required|alpha_dash|min:5|max:191|unique:posts,slug',
+                'category_id'   => 'required|integer',
+                'body'          => 'required'
             ));
         }
 
@@ -149,6 +167,7 @@ class PostController extends Controller
 
         $post->title = $request->input('title'); // input get parameters from GET or POST send
         $post->slug = $request->input('slug');
+        $post->category_id = $request->input('category_id');
         $post->body = $request->input('body');
         // laravel change autmatically the changed last timestamp
 
