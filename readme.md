@@ -79,7 +79,7 @@ si può facimenete capire che:
 
 -------------------------
 
-Per quanto concerne la creazione delle categorieprocedo nel seguente modo
+Per quanto concerne la creazione delle categorie procedo nel seguente modo
 - creo la migrazione primaria con la tabella. *ricordo che la creazione di una migrazione creerà una tabella con nome al plurale- Category creerà categories come tabella*
 
 	php artisan make:migration creo_tabella_categoria --create=NOME_TABELLA
@@ -102,6 +102,10 @@ nel route infine richiamo il tutto appena creato usando un terzo parametro per l
 	Route::resource('categories', 'CategoryController', ['except' => 'create']);
 	// se volessi avere una sola delle route potrei usare la seguent eriga. Questa crea SOLO la route create
 	Route::resource('categories', 'CategoryController', ['only' => 'create']);
+
+-------------------------
+
+Per la creazione dei tags possiamo usare le relazioni **multi a molti** usando una tebella intermediaria che permette una infinita usabilità dei tag e una ricercabilità elevata. Le relazioni di questo tipo sono usate da laravel attraverso la funzione `belongsToMany('App\NOME_MODELLO', 'post_tag', 'post_id', 'tag_id')` la quale ha dei parametri che indicano: il nome del Modello, la relazione tra le due parti ovvero la tabella intermediaria con la convenzione tabella1_tabella2 della tabella intermediaria, le colonne interessate ovvero la corrente e quella da relazionare
 
 -------------------------
 
