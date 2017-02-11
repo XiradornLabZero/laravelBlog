@@ -79,6 +79,32 @@ si può facimenete capire che:
 
 -------------------------
 
+Per quanto concerne la creazione delle categorieprocedo nel seguente modo
+- creo la migrazione primaria con la tabella. *ricordo che la creazione di una migrazione creerà una tabella con nome al plurale- Category creerà categories come tabella*
+
+	php artisan make:migration creo_tabella_categoria --create=NOME_TABELLA
+
+- creo la colonna per stabilire la relazione
+
+	php artisan make:migration creo_id_categoria_nella_tabella --table=NOME_TABELLA
+
+- stabilisco adesso il modello di accesso
+
+	php artisan make:model Category [accessorio per creare una migrazione al volo --migration]
+
+- creo il controller per l'inoltro delle richieste. Se voglio abbia una struttura CRUD posso fare uso del flag `--resource`
+
+	php artisan make:controller CategoryController --resource
+
+nel route infine richiamo il tutto appena creato usando un terzo parametro per limitare il tutto e per usare solo le voci interessate.
+
+	// Categories routes - ato escludendo la route creat e attraverso il parametro exclude
+	Route::resource('categories', 'CategoryController', ['except' => 'create']);
+	// se volessi avere una sola delle route potrei usare la seguent eriga. Questa crea SOLO la route create
+	Route::resource('categories', 'CategoryController', ['only' => 'create']);
+
+-------------------------
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
