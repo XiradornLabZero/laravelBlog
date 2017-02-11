@@ -10,6 +10,11 @@
                 <div class="panel-heading">Email Password</div>
 
                 <div class="panel-body">
+                    @if (session('status'))
+                        <div class="alert alert-info">
+                            Email sent with a Reset Link !!!
+                        </div>
+                    @endif
 
                     {!! Form::open(['url' => 'password/email', 'method' => "POST"]) !!}
 

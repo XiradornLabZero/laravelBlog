@@ -44,10 +44,10 @@ Route::post('auth/register', 'Auth\RegisterController@register');
 
 // Password Reset Routes (Xiradorn Adjustment for Laravel 5.4)
 // IMPORTANT: the order of the route is REALLY IMPORTANT to correct display form
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
-Route::get('password/reset/{token?}', 'Auth\ResetPasswordController@showResetForm'); # the ? indicate a optional variable
-Route::post('password/reset', ['uses' => 'Auth\ResetPasswordController@reset', 'as' => 'password.reset']);
+Route::post('password/email', ['uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
+Route::get('password/reset', ['uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
+Route::get('password/reset/{token?}', ['uses' => 'Auth\ResetPasswordController@showResetForm', 'as' => 'password.reset']); # the ? indicate a optional variable
+Route::post('password/reset', ['uses' => 'Auth\ResetPasswordController@reset']);
 // Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[a-zA-Z0-9\_\-]+');
