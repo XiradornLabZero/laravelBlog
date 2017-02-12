@@ -60,7 +60,11 @@ Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getS
 Route::get('blog', ['uses' => 'BlogController@getIndex', 'as' => 'blog.index']);
 
 Route::get('about', 'PageController@getAbout');
+
 Route::get('contact', 'PageController@getContact');
+// use for mail sending
+Route::post('contact', 'PageController@postContact');
+
 Route::get('/', 'PageController@getHome');
 
 Route::resource('posts', 'PostController');

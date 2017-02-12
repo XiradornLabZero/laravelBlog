@@ -12,7 +12,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Post;
+use Mail;
+use Session;
 
 class PageController extends Controller {
 
@@ -87,6 +90,35 @@ class PageController extends Controller {
 	 */
 	public function getContact() {
 		return view('pages.contact');
+	}
+
+	public function postContact(Request $request) {
+		$this->validate($request, array(
+			'email' 	=> 'required|email',
+			'subject'	=> 'required|min:3',
+			'message' 	=> 'required|min:10'
+		));
+
+		$data = array(
+			'email'			=> $request->email,
+			'subject' 		=> $request->subject,
+			# message is a builtin var for attachment things
+			'bodyMessage'	=> $request->message
+		);
+
+		// Mail::queue(); #used when we will send a tons of email and so we queue the mails
+		// for one mail we ca use the normal function send
+		// Mail::send('view', $data, function(){ # header data ... });
+		Mail::send('emails.contact', $data, function($message) use ($data) {
+			$message->from($data['email']);
+			$message->to('myMail@example.com');
+			$message->subject($data['subject']);
+
+		});
+
+		Session::flash('success', 'Mail Correctly Sent !!!');
+
+		return redirect('/');
 	}
 
 }
