@@ -221,8 +221,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
         $post = Post::find($id);
+        //now we must use the fuction detach for not have orphan elements
+        // so now i don't have element referred to this post
+        $post->tags()->detach();
 
         $post->delete();
 

@@ -114,6 +114,14 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // we also use detch for delete all reference to dead tag
+        $tag = Tag::find($id);
+        $tag->posts()->detach();
+
+        $tag->delete();
+
+        Session::flash('success', "Tag correctly removed!!!");
+
+        return redirect()->route('tags.index');
     }
 }

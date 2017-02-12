@@ -117,6 +117,10 @@ Una importante funzione di controllo è il metodo chiamato **dump&die** o meglio
 
 -------------------------
 
+Per la cancellazione di elementi da tabelle pivot (intermediate) possiamo ricorrere alla funzione detach perchè abbiamo bisogno di eliminare elementi senza danneggiare il db e avere problematiche
+
+-------------------------
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
