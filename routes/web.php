@@ -53,6 +53,9 @@ Route::post('password/reset', ['uses' => 'Auth\ResetPasswordController@reset']);
 // Categories routes
 Route::resource('categories', 'CategoryController', ['except' => 'create']);
 
+// Tags routes
+Route::resource('tags', 'TagController', ['except' => 'create']);
+
 Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[a-zA-Z0-9\_\-]+');
 Route::get('blog', ['uses' => 'BlogController@getIndex', 'as' => 'blog.index']);
 
