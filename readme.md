@@ -105,7 +105,9 @@ nel route infine richiamo il tutto appena creato usando un terzo parametro per l
 
 -------------------------
 
-Per la creazione dei tags possiamo usare le relazioni **multi a molti** usando una tebella intermediaria che permette una infinita usabilità dei tag e una ricercabilità elevata. Le relazioni di questo tipo sono usate da laravel attraverso la funzione `belongsToMany('App\NOME_MODELLO', 'post_tag', 'post_id', 'tag_id')` la quale ha dei parametri che indicano: il nome del Modello, la relazione tra le due parti ovvero la tabella intermediaria con la convenzione tabella1_tabella2 della tabella intermediaria, le colonne interessate ovvero la corrente e quella da relazionare
+Per la creazione dei tags possiamo usare le relazioni **multi a molti** usando una tebella intermediaria che permette una infinita usabilità dei tag e una ricercabilità elevata. Le relazioni di questo tipo sono usate da laravel attraverso la funzione `belongsToMany('App\NOME_MODELLO', 'post_tag', 'post_id', 'tag_id')` la quale ha dei parametri che indicano: il nome del Modello, la relazione tra le due parti ovvero la tabella intermediaria con la convenzione tabella1_tabella2 della tabella intermediaria, le colonne interessate ovvero la corrente e quella da relazionare.
+
+*La convenzione usata prevede che la tabella intermedia abbia i nomi delle due tabelle bersaglio disposte usando ordina alfabetico. Faccio un esempio: se ho due tabelle chiamate patate e cipolle, la tabella intemedia avrà una configurazione cipolla_patata. Quindi per posts e tags avrò post_tag*
 
 -------------------------
 
