@@ -20,11 +20,4 @@ class Category extends Model
         return $this->hasMany('App\Post');
 
     }
-
-    public function tags() {
-
-        // now we use the many to many relationship in this way
-        return $this->belongsToMany('App\Tag');
-
-    }
 }

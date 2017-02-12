@@ -111,6 +111,12 @@ Per la creazione dei tags possiamo usare le relazioni **multi a molti** usando u
 
 -------------------------
 
+#Funzione di Controllo - Utile in sviluppo
+
+Una importante funzione di controllo è il metodo chiamato **dump&die** o meglio indicato `dd(VARIABILE)`. Questa mi darà a video il dump della variabile con tutte le informazioni e le caratteristiche e bloccando l'applicazione, ne previene immissione dati. Molto utile in fase di creazione
+
+-------------------------
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">

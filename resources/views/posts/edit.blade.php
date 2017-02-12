@@ -2,6 +2,10 @@
 
 @section('title', '| Blog Post Edit')
 
+@section('stylesheet')
+    {{ Html::style('css/select2.min.css') }}
+@endsection
+
 @section('content')
 
     <div class="row">
@@ -17,6 +21,9 @@
             {{-- {{ Form::select('category_id', ['key' => 'value', 'key2' => 'value2']) }} but is NOT recomended - generate this into controller --}}
             {{-- {{ Form::select('category_id', $categories, $post->category_id, ["class" => "form-control"]) }} - $post->category_id is the current and w/ model form binding is not required --}}
             {{ Form::select('category_id', $categories, null, ["class" => "form-control"]) }}
+
+            {{ Form::label('tags', 'Tags:', ["class" => "form-spacing-top"]) }}
+            {{ Form::select('tags[]', $tags, null, ["class" => "form-control select2-multi", "multiple" => "multiple"]) }}
 
             {{ Form::label('slug', "Slug:", ["class" => "form-spacing-top"]) }}
             {{ Form::text('slug', null, ["class" => 'form-control']) }}
@@ -56,3 +63,12 @@
     </div> <!-- end of the form -->
 
 @stop
+
+@section('scripts')
+    {{ Html::script('js/select2.full.min.js') }}
+    <script type="text/javascript">
+        $('.select2-multi').select2();
+        // for a programatic access to the data we mus set params from the api of select2 docs
+        $('.select2-multi').select2().val({!! json_encode($post->tags->pluck('id')) !!}).trigger('change');
+    </script>
+@endsection

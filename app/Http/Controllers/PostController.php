@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Post;
+use App\Tag;
 use Session;
 
 class PostController extends Controller
@@ -43,7 +44,8 @@ class PostController extends Controller
         // nothing else
         // UPDATE - now we have to bring data from cat
         $categories = Category::all();
-        return view('posts.create')->withCategories($categories);
+        $tags = Tag::all();
+        return view('posts.create')->withCategories($categories)->withTags($tags);
     }
 
     /**
@@ -54,6 +56,9 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // we use the dump&die function from laravel
+        // dd($request);
+
         // this function have this tasks
         // validate data w/ $this->validate($request, array())
         $this->validate($request, array(
@@ -66,12 +71,24 @@ class PostController extends Controller
         // store data into the database
         $post = new Post;
 
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->category_id = $request->category_id;
-        $post->body = $request->body;
+        $post->title        = $request->title;
+        $post->slug         = $request->slug;
+        $post->category_id  = $request->category_id;
+        $post->body         = $request->body;
 
         $post->save();
+
+        // after we have creted a post, we can attach the tags to it
+        // so we also must create the reletionship. For doing this
+        // i can use sync method
+        if (isset($request->tags)) {
+            # code...
+            // $post->tags()->sync($request->tags, true); #now we want override the association into the db for replace current association
+            $post->tags()->sync($request->tags); #equal to the upper line
+        } else {
+            #this line is used when we dont have any tag
+            $post->tags()->sync(array()); #equal to the upper line
+        }
 
         // two kind of session.
         // the FLASH session is a particular session that exist
@@ -119,7 +136,6 @@ class PostController extends Controller
 
         // inject categories
         $categories = Category::all();
-
         // i must do the select loop into this controller because is a better solution than make into views
         $cats = []; #instanciate ary for setup all the elements and setup for view
         foreach ($categories as $category) {
@@ -127,9 +143,17 @@ class PostController extends Controller
             $cats[$category->id] = $category->name;
         }
 
+        // inject tags
+        $tags = Tag::all();
+        $tags2 = [];
+        foreach ($tags as $tag) {
+            # code...
+            $tags2[$tag->id] = $tag->name;
+        }
+
         # return the wiew with informations
         // return view('posts.edit')->withPost($post)->withCategories($categories);
-        return view('posts.edit')->withPost($post)->withCategories($cats);
+        return view('posts.edit')->withPost($post)->withCategories($cats)->withTags($tags2);
 
     }
 
@@ -172,6 +196,15 @@ class PostController extends Controller
         // laravel change autmatically the changed last timestamp
 
         $post->save();
+
+        if (isset($request->tags)) {
+            # code...
+            // $post->tags()->sync($request->tags, true); #now we want override the association into the db for replace current association
+            $post->tags()->sync($request->tags); #equal to the upper line
+        } else {
+            #this line is used when we dont have any tag
+            $post->tags()->sync(array()); #equal to the upper line
+        }
 
         // set flash data with success message
         Session::flash('success', 'This post was successfully changed !!!');

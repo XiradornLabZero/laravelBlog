@@ -13,4 +13,12 @@ class Post extends Model
         return $this->belongsTo('App\Category');
 
     }
+
+    // mistake. I have put those lines of code into wrong model
+    public function tags() {
+
+        // now we use the many to many relationship in this way
+        return $this->belongsToMany('App\Tag');
+
+    }
 }
