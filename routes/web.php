@@ -60,6 +60,10 @@ Route::resource('tags', 'TagController', ['except' => 'create']);
 // Route::resource('comments', 'CommentController', ['except' => 'create']);
 // i can make a controller for comments froma post_id
 Route::post('comments/{post_id}', ['uses' => 'CommentController@store', 'as' => 'comments.store']);
+Route::get('comments/{id}/edit', ['uses' => 'CommentController@edit', 'as' => 'comments.edit']);
+Route::put('comments/{id}', ['uses' => 'CommentController@update', 'as' => 'comments.update']);
+Route::delete('comments/{id}', ['uses' => 'CommentController@destroy', 'as' => 'comments.destroy']);
+Route::get('comments/{id}/delete', ['uses' => 'CommentController@delete', 'as' => 'comments.delete']);
 
 Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[a-zA-Z0-9\_\-]+');
 Route::get('blog', ['uses' => 'BlogController@getIndex', 'as' => 'blog.index']);
