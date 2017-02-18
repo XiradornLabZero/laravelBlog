@@ -4,6 +4,20 @@
 
 @section('stylesheet')
     {{ Html::style('css/select2.min.css') }}
+    <script src='//cloud.tinymce.com/stable/tinymce.min.js'></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'link code image imagetools',
+            menubar: false, //for disable the top menubar
+            // toolbar: false, //for disable the top toolbar
+            // toolbar: "bold italic | copy paste", //for customize top toolbar
+            // menu: {
+            //     view: {title: "Edit", items: 'cut copy paste'}
+            //     // for have only one menu in the menubar
+            // }
+        });
+    </script>
 @endsection
 
 @section('content')

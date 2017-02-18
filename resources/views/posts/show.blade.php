@@ -8,7 +8,9 @@
         <div class="col-md-8">
 
             <h1>{{ $post->title }}</h1>
-            <p class="lead">{{ $post->body }}</p>
+            {{-- <p class="lead">{{ $post->body }}</p> - the double parentesis use htmlspecialchar --}}
+            {{-- the parentesis and the double ! don't use this function because we want html into it --}}
+            <p class="lead">{!! $post->body !!}</p>
             <hr>
             <div class="tags">
                 @foreach ($post->tags as $tag)
