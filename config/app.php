@@ -179,6 +179,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // added html purifier
+        Mews\Purifier\PurifierServiceProvider::class,
+
     ],
 
     /*
@@ -230,6 +233,8 @@ return [
         // Used buy laravelcollective forms
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        // used for html
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
 
     ],
 
