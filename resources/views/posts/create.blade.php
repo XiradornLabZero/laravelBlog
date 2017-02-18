@@ -28,7 +28,8 @@
             <h1>Create New Post</h1>
             <hr>
             {{-- Collective\Html\HtmlServiceProvider::class-> |||| Classic way without aliases --}}
-            {!! Form::open(['route' => 'posts.store', 'data-parsley-validate' => '']) !!}
+            {{-- <form class="..." action="..." method=".." enctype="multipart/form-data"> - same as below --}}
+            {!! Form::open(['route' => 'posts.store', 'data-parsley-validate' => '', "files" => true]) !!}
                 {{ Form::label('title', 'Title:') }}
                 {{ Form::text('title', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
 
@@ -48,6 +49,9 @@
                         <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                     @endforeach
                 </select>
+
+                {{ Form::label("featured_image", "Upload Featured Images") }}
+                {{ Form::file("featured_image") }}
 
                 {{ Form::label('body', "Post Body") }}
                 {{ Form::textarea('body', null, ['class' => 'form-control']) }}

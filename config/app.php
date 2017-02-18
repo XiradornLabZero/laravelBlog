@@ -182,6 +182,9 @@ return [
         // added html purifier
         Mews\Purifier\PurifierServiceProvider::class,
 
+        // image intervention
+        Intervention\Image\ImageServiceProvider::class
+
     ],
 
     /*
@@ -235,6 +238,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         // used for html
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
+        // image intervention
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 
